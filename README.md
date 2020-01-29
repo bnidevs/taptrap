@@ -1,5 +1,7 @@
 # taptrap
 
+##### Bill Ni, Starwarswii
+
 ### Installation + Run
 
 to run locally, [install node / npm](https://nodejs.org/en/)
