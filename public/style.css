@@ -11,6 +11,16 @@
   height: 100%;
 }
 
+/* the style of a cell when triggered with a sound */
+.triggeredSound {
+  background-color: DeepSkyBlue;
+}
+
+/* the style of a cell when triggered with no assigned sound */
+.triggeredBlank {
+	background-color: LightCyan;
+}
+
 /* buttons inside the grid */
 .cellButton {
   margin-top: auto;
@@ -25,6 +35,11 @@
 /* the hotkey buttons inside cells */
 .keyButton {
   right: 0;
+}
+
+/* when a hotkey button is waiting for a key */
+.assigning {
+	background-color: red;
 }
 
 #grid {
@@ -57,8 +72,4 @@
 #recordPlay {
   text-align: center;
   padding-bottom: 4%;
-}
-
-.red {
-  background-color: red;
 }
