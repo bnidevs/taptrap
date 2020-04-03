@@ -177,6 +177,8 @@ $(function() {
 
 			await Recorder.start();
 			
+			//TODO should probably rename recordTime to something about beats
+			
 			timeoutId = setTimeout(
 				function() {$("#recordButton").click();},
 				parseInt($("#recordTime").val()*BEAT_MULTIPLIER)
