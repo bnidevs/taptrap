@@ -141,54 +141,6 @@ $(function() {
 	}
 	
 	
-	
-	var recordIcon = $("#recordIcon");
-	var playIcon = $("#playIcon");
-	
-	var recording = false;
-	var playing = false;
-	
-	var sound = null;
-	
-	// var sound = new Howl({
-		// src: ['sound.mp3'],
-		// loop: true
-	// });
-	
-	/*
-	function handleRecord(event) {
-		
-		recordIcon.css("color", recording ? "black" : "red");
-		recording = !recording;
-	}
-
-	function handlePlay(event) {
-		if (sound === null) {
-			//put here for now, as chrome complains about trying to use webaudio
-			//without user input
-			sound = new Howl({
-				src: ['sound.mp3'],
-				loop: true
-			});
-		}
-		
-		
-		if (playing) {
-			sound.pause();
-		} else {
-			sound.play();
-		}
-		
-		playIcon.css("color", playing ? "black" : "lime");
-		
-		playing = !playing;
-	}
-	*/
-	
-	
-	// $("#recordButton").click(handleRecord);
-	// $("#playButton").click(handlePlay);
-	
 	//id of the timeout that clicks the stop button
 	var timeoutId = null;
 
@@ -264,13 +216,6 @@ $(function() {
 			
 			$("#status").text("sound from upload loaded");
 			
-			//clear the file chooser text
-			//$("#fileInput").val("");
-			
-			//cells[0].audio = sound;
-			
-			// console.log('playing');
-			// sound.play();
 		});
 		
 		console.log('reading');
