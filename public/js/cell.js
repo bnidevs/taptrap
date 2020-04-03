@@ -51,7 +51,9 @@ const modes = {
 				
 			} else {
 				
-				sound.pause();
+				//we stop the sound, instead of pause,
+				//so that we seek the audio back to the start
+				sound.stop();
 				cell.removeClass(SOUND_CLASS);
 			}
 			
