@@ -86,12 +86,12 @@ $(function() {
 		
 		if (waitingCell !== null) {
 			//TODO probably better way to do this
-			waitingCell.keyButton.removeClass("red");
+			waitingCell.keyButton.removeClass("assigning");
 		}
 		
 		var cell = cells[id];
 		
-		cell.keyButton.addClass("red");
+		cell.keyButton.addClass("assigning");
 		waitingCell = cell;
 	}
 	
@@ -321,7 +321,7 @@ $(function() {
 			hotkeys[key] = waitingCell;
 			
 			//mark this cell as not waiting for a key anymore
-			waitingCell.keyButton.removeClass("red");
+			waitingCell.keyButton.removeClass("assigning");
 			waitingCell = null;
 			
 		} else {
