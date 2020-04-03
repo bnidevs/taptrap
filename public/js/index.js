@@ -9,6 +9,8 @@ const BPM = 120;
 //ms per beat
 const BEAT_MULTIPLIER = 1/(BPM/60/1000);
 
+//the class used for when a key button is in assigning mode
+const ASSIGNING_CLASS = "assigning";
 
 
 //called on page load
@@ -86,12 +88,12 @@ $(function() {
 		
 		if (waitingCell !== null) {
 			//TODO probably better way to do this
-			waitingCell.keyButton.removeClass("assigning");
+			waitingCell.keyButton.removeClass(ASSIGNING_CLASS);
 		}
 		
 		var cell = cells[id];
 		
-		cell.keyButton.addClass("assigning");
+		cell.keyButton.addClass(ASSIGNING_CLASS);
 		waitingCell = cell;
 	}
 	
@@ -141,16 +143,17 @@ $(function() {
 	}
 	
 	
-	//id of the timeout that clicks the stop button
-	var timeoutId = null;
 
-	function beat(x){
+	function beat(x) {
 		return new Promise(resolve => {
 			setTimeout(() => {
 				resolve(x);
-			}, BEAT_MULTIPLIER);
+			}, 1*BEAT_MULTIPLIER);
 		});
 	}
+	
+	//id of the timeout that clicks the stop button
+	var timeoutId = null;
 	
 	//TODO could probably remove the "Button" suffix on these
 	
@@ -266,7 +269,7 @@ $(function() {
 			hotkeys[key] = waitingCell;
 			
 			//mark this cell as not waiting for a key anymore
-			waitingCell.keyButton.removeClass("assigning");
+			waitingCell.keyButton.removeClass(ASSIGNING_CLASS);
 			waitingCell = null;
 			
 		} else {
