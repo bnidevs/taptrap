@@ -59,6 +59,12 @@
   padding-bottom: 4%;
 }
 
+#volume-meter{
+  width: 3vw;
+  height: 7vw;
+  margin-bottom: -3vw;
+}
+
 .red {
   background-color: red;
 }

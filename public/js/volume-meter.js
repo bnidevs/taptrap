@@ -1,9 +1,9 @@
-var WIDTH = 50;
-var HEIGHT = 100;
+var WIDTH = document.getElementById("volume-meter").width;
+var HEIGHT = document.getElementById("volume-meter").height;
 
 var canvasContext = document.getElementById("volume-meter").getContext("2d");
-canvasContext.translate(25,50);
-canvasContext.scale(2,-2);
+canvasContext.translate(WIDTH / 2, HEIGHT / 2);
+canvasContext.scale(1,-1);
 var audioContext;
 var meter;
 
@@ -38,7 +38,7 @@ function streamgood(stream) {
 
 function drawLoop( time ) {
     // clear the background
-    canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+    canvasContext.clearRect(WIDTH / -2, HEIGHT / -2,WIDTH,HEIGHT);
 
     // check if we're currently clipping
     if (meter.checkClipping())
@@ -47,7 +47,7 @@ function drawLoop( time ) {
         canvasContext.fillStyle = "green";
 
     // draw a bar based on the current volume
-    canvasContext.fillRect(0, 0, WIDTH, HEIGHT*meter.volume);
+    canvasContext.fillRect(WIDTH / -2, HEIGHT / -2, WIDTH, HEIGHT*meter.volume);
 
     // set up the next visual callback
     rafID = window.requestAnimationFrame( drawLoop );
