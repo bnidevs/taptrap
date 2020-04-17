@@ -2,12 +2,15 @@ var WIDTH = 50;
 var HEIGHT = 100;
 
 var canvasContext = document.getElementById("volume-meter").getContext("2d");
-canvasContext.scale(-1,1);
+canvasContext.translate(25,50);
+canvasContext.scale(2,-2);
 var audioContext;
 var meter;
 
-window.onload = function() {
-	audioContext = new AudioContext();
+audioContext = new AudioContext();
+
+document.body.addEventListener("mouseenter", function(event){
+	audioContext.resume();
 	var stream = navigator.getUserMedia({"audio": {
 	                "mandatory": {
 	                    "googEchoCancellation": "false",
@@ -17,7 +20,7 @@ window.onload = function() {
 	                },
 	                "optional": []
 	            }}, streamgood, streamnotgood);
-}
+})
 
 function streamnotgood() {
     alert('Stream generation failed.');
