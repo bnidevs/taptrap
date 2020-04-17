@@ -65,6 +65,11 @@
   margin-bottom: -3vw;
 }
 
+#waveform{
+  width: 15vw;
+  height: 7vw;
+}
+
 .red {
   background-color: red;
 }
