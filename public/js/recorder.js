@@ -18,17 +18,29 @@ const initRecorder = () => new Promise(async resolve => {
 	const stop = () => new Promise(resolve => {
 		
 		mediaRecorder.addEventListener("stop", () => {
-			
 			const audioBlob = new Blob(audioChunks);
-			const audioUrl = URL.createObjectURL(audioBlob);
-			
+
+			let fileReader = new FileReader();
+			let arrayBuffer;
+			let resultAnswer;
+			let audioContext = new AudioContext();
+			fileReader.onloadend = () => {
+				arrayBuffer = fileReader.result
+				// Convert array buffer into audio buffer
+				audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
+					// Do something with audioBuffer
+					resultAnswer = audioBuffer
+				})
+			}
+			fileReader.readAsArrayBuffer(audioBlob);
+			const audioUrl = URL.createObjectURL(audioBlob);	
 			const audio = new Howl({
 				src: audioUrl,
 				format: "webm"
 			});
 			
 			//return the sound
-			resolve(audio);
+			resolve([audio,resultAnswer]);
 		});
 
 		mediaRecorder.stop();

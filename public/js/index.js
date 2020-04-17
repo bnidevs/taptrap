@@ -228,8 +228,8 @@ $(function() {
 			);
 			
 		} else {
-			pendingSound = await Recorder.stop();
-			
+			var pending = await Recorder.stop();
+			pendingSound = pending[0];
 			$("#status").text("sound from recording loaded");
 		}
 		
