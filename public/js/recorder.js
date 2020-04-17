@@ -26,6 +26,12 @@ const initRecorder = () => new Promise(async resolve => {
 				src: audioUrl,
 				format: "webm"
 			});
+
+			var wavesurfer = WaveSurfer.create({
+				container: '#waveform'
+			});
+
+			wavesurfer.load(audioUrl);
 			
 			//return the sound
 			resolve(audio);
