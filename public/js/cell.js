@@ -1,41 +1,58 @@
+
+const SOUND_CLASS = "triggeredSound";
+const BLANK_CLASS = "triggeredBlank";
+
+//flashes the given cell with the given class
+function flash(cell, clazz=SOUND_CLASS) {
+	cell.addClass(clazz);
+	setTimeout(function() {cell.removeClass(clazz);}, 100);
+}
+
 //each mode is an object that holds
 //the mode name as text and a function
 //the function says what to do with the sound when you click the cell
 
-//TODO might make more sense for the play function to take a reference to the Cell
-//then it could e.g. change how the color toggles with different modes
 const modes = {
 	CUT: {
 		text: "Cut",
-		play: function(sound) {
+		play: function(sound, cell) {
 			
 			//cut stops the current sound before restarting it
 			if (sound.playing()) {
 				sound.stop();
 			}
 			sound.play();
-		}
+			flash(cell);
+		},
 	},
 	
 	OVERLAP: {
 		text: "Overlap",
-		play: function(sound) {
+		play: function(sound, cell) {
 			
 			//overlap plays the sound on top of the old version
 			//this is what happens by default with Howler
 			sound.play();
+			flash(cell);
 		}
 	},
 	
 	LOOP: {
 		text: "Loop",
-		play: function(sound) {
+		play: function(sound, cell) {
 			
 			//loop pauses or resumes the sound loop
-			if (sound.playing()) {
-				sound.pause();
-			} else {
+			if (!sound.playing()) {
+				
 				sound.play();
+				cell.addClass(SOUND_CLASS);
+				
+			} else {
+				
+				//we stop the sound, instead of pause,
+				//so that we seek the audio back to the start
+				sound.stop();
+				cell.removeClass(SOUND_CLASS);
 			}
 			
 		}
@@ -124,11 +141,11 @@ export default class Cell {
 		//this is just a basic example
 		
 		console.log("clicked on cell", this.id);
-
-		this.cellButton.toggleClass("red");
 		
 		if (this.sound !== null) {
-			this.mode.play(this.sound);
+			this.mode.play(this.sound, this.cellButton);
+		} else {
+			flash(this.cellButton, BLANK_CLASS);
 		}
 	}
 }
