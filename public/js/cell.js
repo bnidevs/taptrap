@@ -12,8 +12,6 @@ function flash(cell, clazz=SOUND_CLASS) {
 //the mode name as text and a function
 //the function says what to do with the sound when you click the cell
 
-//TODO might make more sense for the play function to take a reference to the Cell
-//then it could e.g. change how the color toggles with different modes
 const modes = {
 	CUT: {
 		text: "Cut",
