@@ -9,6 +9,8 @@ const BPM = 120;
 //ms per beat
 const BEAT_MULTIPLIER = 1/(BPM/60/1000);
 
+//the class used for when a key button is in assigning mode
+const ASSIGNING_CLASS = "assigning";
 
 
 //called on page load
@@ -86,12 +88,12 @@ $(function() {
 		
 		if (waitingCell !== null) {
 			//TODO probably better way to do this
-			waitingCell.keyButton.removeClass("red");
+			waitingCell.keyButton.removeClass(ASSIGNING_CLASS);
 		}
 		
 		var cell = cells[id];
 		
-		cell.keyButton.addClass("red");
+		cell.keyButton.addClass(ASSIGNING_CLASS);
 		waitingCell = cell;
 	}
 	
@@ -141,64 +143,17 @@ $(function() {
 	}
 	
 	
-	
-	var recordIcon = $("#recordIcon");
-	var playIcon = $("#playIcon");
-	
-	var recording = false;
-	var playing = false;
-	
-	var sound = null;
-	
-	// var sound = new Howl({
-		// src: ['sound.mp3'],
-		// loop: true
-	// });
-	
-	/*
-	function handleRecord(event) {
-		
-		recordIcon.css("color", recording ? "black" : "red");
-		recording = !recording;
-	}
 
-	function handlePlay(event) {
-		if (sound === null) {
-			//put here for now, as chrome complains about trying to use webaudio
-			//without user input
-			sound = new Howl({
-				src: ['sound.mp3'],
-				loop: true
-			});
-		}
-		
-		
-		if (playing) {
-			sound.pause();
-		} else {
-			sound.play();
-		}
-		
-		playIcon.css("color", playing ? "black" : "lime");
-		
-		playing = !playing;
-	}
-	*/
-	
-	
-	// $("#recordButton").click(handleRecord);
-	// $("#playButton").click(handlePlay);
-	
-	//id of the timeout that clicks the stop button
-	var timeoutId = null;
-
-	function beat(x){
+	function beat(x) {
 		return new Promise(resolve => {
 			setTimeout(() => {
 				resolve(x);
-			}, BEAT_MULTIPLIER);
+			}, 1*BEAT_MULTIPLIER);
 		});
 	}
+	
+	//id of the timeout that clicks the stop button
+	var timeoutId = null;
 	
 	//TODO could probably remove the "Button" suffix on these
 	
@@ -221,6 +176,8 @@ $(function() {
 			document.getElementById("recordButton").innerHTML = tempst;
 
 			await Recorder.start();
+			
+			//TODO should probably rename recordTime to something about beats
 			
 			timeoutId = setTimeout(
 				function() {$("#recordButton").click();},
@@ -264,13 +221,6 @@ $(function() {
 			
 			$("#status").text("sound from upload loaded");
 			
-			//clear the file chooser text
-			//$("#fileInput").val("");
-			
-			//cells[0].audio = sound;
-			
-			// console.log('playing');
-			// sound.play();
 		});
 		
 		console.log('reading');
@@ -321,7 +271,7 @@ $(function() {
 			hotkeys[key] = waitingCell;
 			
 			//mark this cell as not waiting for a key anymore
-			waitingCell.keyButton.removeClass("red");
+			waitingCell.keyButton.removeClass(ASSIGNING_CLASS);
 			waitingCell = null;
 			
 		} else {
