@@ -14,6 +14,7 @@
 		
 		<div id="recordPlay">
 			<button id="recordButton"><i id="recordIcon" class="fa fa-microphone"></i></button>
+			<canvas id="volume-meter"></canvas>
 			<button id="playButton"><i id="playIcon" class="fa fa-play"></i></button>
 			<br>
 			<br>
@@ -31,5 +32,10 @@
 		<!-- filled by jquery -->
 		<table id="grid" />
 
+		<div style="display:none" id="waveform"></div>
+
 	</body>
+
+	<script src="js/volume-meter.js"></script>
+	<script src="https://unpkg.com/wavesurfer.js"></script>
 </html>
