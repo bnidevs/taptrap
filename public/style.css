@@ -76,4 +76,17 @@
 
 #recordTime {
 	width: 6ch; /* "ch" is "0"-character-widths */
+  
+#volume-meter{
+  width: 3vw;
+  height: 7vw;
+  margin-bottom: -3vw;
 }
+
+#waveform{
+  border-radius: 5% 5% 5% 5%;
+  border: black 5%;
+  width: 15vw;
+  height: 7vw;
+}
+

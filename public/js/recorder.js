@@ -1,4 +1,12 @@
 //sets up the audio for recording and returns start and stop functions
+var wavesurfer = WaveSurfer.create({
+	container: '#waveform',
+	normalize: false,
+	waveColor: '#0F0',
+	fillParent: true,
+	minPxPerSec: 10
+});
+
 const initRecorder = () => new Promise(async resolve => {
 	
 	const stream = await navigator.mediaDevices.getUserMedia({audio: true});
@@ -26,6 +34,8 @@ const initRecorder = () => new Promise(async resolve => {
 				src: audioUrl,
 				format: "webm"
 			});
+
+			wavesurfer.load(audioUrl);
 			
 			//return the sound
 			resolve(audio);
