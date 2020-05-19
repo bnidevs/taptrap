@@ -130,6 +130,9 @@ export default class Cell {
 		}
 		
 		this.sound = sound;
+
+		this.cellButton.innerHTML = document.getElementById("waveform").innerHTML;
+		document.getElementById("waveform").innerHTML = "";
 		//we need to check this, in case the mode was switched to loop before a sound was loaded
 		this.sound.loop(this.mode === modes.LOOP);
 	}
