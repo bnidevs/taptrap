@@ -76,7 +76,8 @@
 
 #recordTime {
 	width: 6ch; /* "ch" is "0"-character-widths */
-  
+}
+
 #volume-meter{
   width: 3vw;
   height: 7vw;
